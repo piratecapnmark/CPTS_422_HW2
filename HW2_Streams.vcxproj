@@ -76,15 +76,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClInclude Include="IndexedNumberStream.hpp">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-=======
->>>>>>> parent of 9ea7759... temp
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileStream.hpp" />
+    <ClInclude Include="IndexedNumberStream.hpp" />
     <ClInclude Include="MemoryStream.hpp" />
     <ClInclude Include="Stream.hpp" />
   </ItemGroup>

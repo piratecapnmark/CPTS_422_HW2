@@ -1,5 +1,8 @@
-#include "Stream.hpp"
+/* By: Josh L. Woldstad*/
 
+
+#include "Stream.hpp"
+#include <fstream>
 using namespace std;
 using namespace CS422;
 

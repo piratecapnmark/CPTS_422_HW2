@@ -1,5 +1,7 @@
-#include "Stream.hpp"
+/* BY: Jiurong Yang*/
 
+
+#include "Stream.hpp"
 using namespace std;
 using namespace CS422;
 
@@ -63,13 +65,13 @@ class MemoryStream : public Stream {
 		    void *pointer;
 			pointer = malloc(streamSize + byteCount);
 			memcpy(pointer, memStream, streamSize);
-			cout << (char*)pointer << endl;
+			//cout << (char*)pointer << endl;
 			memcpy(((char*)pointer + streamSize), buf, byteCount);
 			
-			for (i = 0; i < (streamSize + byteCount); i++)
-			{
-				printf("%c", *((char*)pointer + i));
-			}
+			//for (i = 0; i < (streamSize + byteCount); i++)
+			//{
+				//printf("%c", *((char*)pointer + i));
+			//}
 
 			streamSize += byteCount;
 			memStream = pointer;

@@ -1,3 +1,6 @@
+/*BY: Andrew Kim*/
+
+
 // Cpt S 422 HW2
 
 #include <iostream>
@@ -77,7 +80,9 @@ class IndexedNumberStream : public Stream
 		{
 			byteSize = size;
 		}
-
+		int Write(const void* buf, int byteCount)
+		{
+			return 0;
+		}
 		
-	}
-}
+};

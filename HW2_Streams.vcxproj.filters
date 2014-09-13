@@ -23,10 +23,13 @@
     <ClInclude Include="Stream.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryStream.hpp">
+    <ClInclude Include="FileStream.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IndexedNumberStream.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryStream.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
