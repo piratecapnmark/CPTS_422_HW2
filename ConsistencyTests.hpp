@@ -52,24 +52,27 @@ int* testReadRandom(Stream &s, int location, int buff) {
 
 // Test whether all three reads return the same thing.
 void consistencyTesting(Stream &s) {
-	int location = rand() % s.GetLength();
-	int size = 128;
+	if (s.GetLength() > 0) {
+		int location = rand() % s.GetLength();
+		int size = 128;
 
-	// Run all three tests: Sequential, Backwards, and Random.
-	int* seq = testReadSequential(s, location, size);
-	int* back = testReadBackwards(s, location, size);
-	int* random = testReadRandom(s, location, size);
+		// Run all three tests: Sequential, Backwards, and Random.
+		int* seq = testReadSequential(s, location, size);
+		int* back = testReadBackwards(s, location, size);
+		int* random = testReadRandom(s, location, size);
 
-	// Are they all the same?
-	if (seq == back && back == random)
-		printf("Data is consistent between all three read formats.\n");
-	// Otherwise, error check.
-	else {
-		if (seq != back)
-			printf("Error: Data is not consistent between sequential and backwards reading.\n");
-		if (seq != random)
-			printf("Error: Data is not consistent between sequential and random reading.\n");
-		if (random != back)
-			printf("Error: Data is not consistent between backwards and random reading.\n");
+		// Are they all the same?
+		if (seq == back && back == random)
+			printf("Data is consistent between all three read formats.\n");
+		// Otherwise, error check.
+		else {
+			if (seq != back)
+				printf("Error: Data is not consistent between sequential and backwards reading.\n");
+			if (seq != random)
+				printf("Error: Data is not consistent between sequential and random reading.\n");
+			if (random != back)
+				printf("Error: Data is not consistent between backwards and random reading.\n");
+		}
 	}
+	else printf("Error: Cannot test consistency, attempting to read from empty stream.\n");
 }
