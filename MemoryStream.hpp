@@ -48,7 +48,7 @@ class MemoryStream : public Stream {
 		}
 		i64 SetPosition(i64 position)
 		{
-			if (position < streamSize)
+			if (position <= streamSize)
 			{
 				current = (int)position;
 				return current;

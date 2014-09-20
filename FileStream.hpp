@@ -3,6 +3,8 @@
 
 #include "Stream.hpp"
 #include <fstream>
+#include <string>
+#include <iostream>
 using namespace std;
 using namespace CS422;
 
@@ -14,15 +16,16 @@ using namespace CS422;
 		int current = 0;
 		bool bread = false;
 		bool bwrite = false;
+		string path;
 		fstream file;
 
 	public:
 		FileStream(string newpath, string perm)
 		{
+			path = newpath;
 			if (perm == "r")
 			{
 				bread = true;
-				file.open(newpath, fstream::in);
 			}
 			else if (perm == "w")
 			{
@@ -33,7 +36,7 @@ using namespace CS422;
 			{
 				bread = true;
 				bwrite = true;
-				file.open(newpath, fstream::in | fstream::out);
+				//file.open(newpath, fstream::in | fstream::out);
 			}
 		};
 
@@ -75,21 +78,27 @@ using namespace CS422;
 
 		int Read(void* buf, int byteCount)
 		{
-			if (!file)
+			file.open(path);
+			if (file.is_open())
 			{
-				return -1;
+
+				file.read((char *)buf, byteCount);
+				file.close();
+				return 0;
 			}
-			file.read((char *)buf, byteCount);
-			return 0;
+			
+			return -1;
+
 		};
 
 		int Write(const void* buf, int byteCount)
 		{
-			if (!file)
-			{
-				return -1;
-			}
-			file.write((char *)buf, byteCount);
+			file.open(path, fstream::out | fstream::trunc);
+			cout << path << endl;
+
+			file << (char *)buf << '\0';
+			file.close();
+
 			return 0;
 		};
 

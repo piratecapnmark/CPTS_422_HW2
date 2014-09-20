@@ -5,22 +5,25 @@
 #include "MemoryStream.hpp"
 #include "FileStream.hpp"
 #include "IndexedNumberStream.hpp"
+#include "ConsistencyTests.hpp"
 using namespace CS422;
 
 
 
 void Write_Validation_Tests(Stream & S)
 {
-	char s_buf[10000];
-	char r_buf[10000];
+	char s_buf[4000];
+	char r_buf[4000];
 
 
 
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 4000; i++)
 	{
 		s_buf[i] = 'a';
 	}
-	cout << s_buf << endl;
+	s_buf[3999] = '\0';
+
+	//cout << s_buf << endl;
 	if (S.CanWrite())
 	{
 		cout << "Can write" << endl;
@@ -32,9 +35,9 @@ void Write_Validation_Tests(Stream & S)
 		return;
 	}
 
-	S.Write(s_buf, 10000);
-	S.Read(r_buf, 10000);
-	if (memcmp(r_buf, s_buf, 10000))
+	S.Write(s_buf, 4000);
+	S.Read(r_buf, 4000);
+	if (memcmp(r_buf, s_buf, 4000)==0)
 	{
 		cout << "T1). PASS: Write all in one write works" << endl;
 	}
@@ -45,30 +48,47 @@ void Write_Validation_Tests(Stream & S)
 
 	char k_buf[1024];
 	char o_buf[1801];
-	for (int i = 0; i < 10000 / 1024; i++)
+	for (int i = 0; i < 4000; i++)
 	{
-		for (int j = 0; j < 1024; j++)
+		s_buf[i] = 'b';
+	}
+	s_buf[3999] = '\0';
+	S.SetPosition(S.GetLength());
+
+	int k = 4000;
+	for (int i = 0; i <= 3; i++)
+	{
+		int l;
+		if ((k - 1024) >= 0)
+		{
+			l = 1024;
+			k = k - 1024;
+		}
+		else
+		{
+			l = k;
+		}
+		for (int j = 0; j <= l; j++)
 		{
 			k_buf[j] = s_buf[i * 1024 + j];
 		}
-		
+		S.Write(k_buf, l);
+		S.SetPosition(S.GetLength());
+	}
+	S.Read(r_buf, 4000);
+
+	if (memcmp(r_buf, s_buf, 4000) == 0)
+	{
+		cout << "T1). PASS: Write by block works" << endl;
+	}
+	else
+	{
+		cout << "T1). FAILED: Write all in one write does not match" << endl;
 	}
 
-	//This section is for testing MemoryStream 
-	//char *str = "hello";
-	//char *str1 = "world";
-	//i.Write(str, 6);
-	//i.Write(str1, 6);
-	//char read[30];
-	//i.SetPosition(5);
-	//i.Read(read, 7);
-	//for (int i = 0; i < 7; i++)
-	//{
-	//	printf("%c", *((char*)read + i));
-	//}
-	//cout << endl;
 
-	//End of MemStream
+
+
 
 	system("pause");
 	return;
