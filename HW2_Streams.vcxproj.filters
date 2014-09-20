@@ -32,5 +32,11 @@
     <ClInclude Include="MemoryStream.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConsistencyTests.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteTests.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

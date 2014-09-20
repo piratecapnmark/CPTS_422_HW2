@@ -79,10 +79,12 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConsistencyTests.hpp" />
     <ClInclude Include="FileStream.hpp" />
     <ClInclude Include="IndexedNumberStream.hpp" />
     <ClInclude Include="MemoryStream.hpp" />
     <ClInclude Include="Stream.hpp" />
+    <ClInclude Include="WriteTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
