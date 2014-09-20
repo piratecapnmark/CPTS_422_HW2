@@ -64,9 +64,11 @@ class MemoryStream : public Stream {
 			int i = 0;
 		    void *pointer;
 			pointer = malloc(streamSize + byteCount);
-			memcpy(pointer, memStream, streamSize);
+			memcpy(pointer, memStream, current);
+			memcpy(((char*)pointer + current), buf, byteCount);
+			memcpy(((char*)pointer + current + byteCount), memStream, streamSize - current);
 			//cout << (char*)pointer << endl;
-			memcpy(((char*)pointer + streamSize), buf, byteCount);
+
 			
 			//for (i = 0; i < (streamSize + byteCount); i++)
 			//{
